@@ -2,15 +2,11 @@ package androidlauncher.alexaapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -50,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         final Intent voiceIntent = getIntent();
         String  speaker = voiceIntent.getStringExtra("speaker");
-        Log.d("STATE", speaker);
         if(speaker == null)
             speaker = "Alexa";
         else

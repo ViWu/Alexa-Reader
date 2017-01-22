@@ -23,16 +23,12 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -43,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected static ArrayList<String> lines;
     protected static ArrayAdapter<String> itemsAdapter;
     private ListView lvItems;
+    private int selected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("Alexa App");
 
         lvItems = (ListView) findViewById(R.id.lvItems);
         names = new ArrayList<String>();
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Select a file above", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Currently selected: " + names.get(selected), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -99,8 +98,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("TestAPI", "Pressed " + names.get(position));
+                selected = position;
                 CallAPI call = new CallAPI();
                 call.execute("selectFile", names.get(position));
+                Snackbar.make(view, "Currently selected: " + names.get(selected), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }

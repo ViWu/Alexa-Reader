@@ -5,6 +5,6 @@
     <item
         android:id="@+id/action_voices"
         android:orderInCategory="100"
-        android:title="Switch to Voices"
+        android:title="Switch to Files"
         app:showAsAction="never" />
 </menu>

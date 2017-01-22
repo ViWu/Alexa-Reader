@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:id="@+id/itemText"
-    android:drawableLeft="@android:drawable/star_on"
+    android:drawableLeft="@android:drawable/btn_star_big_on"
     android:drawablePadding="8dp"
     android:padding="15dp"
     android:gravity="center|left"/>

@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -63,10 +65,8 @@ public class MainActivity extends AppCompatActivity {
         if (mWifi.isConnected()) {
             // Do whatever
             CallAPI call = new CallAPI();
-            //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            //String SortBy = prefs.getString(getString(R.string.pref_movie_sort_by_key),
-            //getString(R.string.pref_movie_sort_by_default));
             call.execute();
+            getFile();
         }
 
         else{
@@ -99,6 +99,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getFile(){
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File[] subFiles = dir.listFiles();
+        String fileName;
+
+        if (subFiles != null)
+        {
+            for (File file : subFiles)
+            {
+                fileName = file.getName();
+                Log.d("STATE", "Download file: " + fileName);
+            }
+        }
     }
 
     public class CallAPI extends AsyncTask<String, Void, String> {
